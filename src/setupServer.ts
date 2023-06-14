@@ -1,33 +1,29 @@
-import {
-  Application,
-  json,
-  urlencoded,
-  Response,
-  Request,
-  NextFunction,
-} from 'express';
-import cors from 'cors';
-import helmet from 'helmet';
-import hpp from 'hpp';
-import cookieSession from 'cookie-session';
-import HTTP_STATUS from 'http-status-codes';
-import { Server } from 'socket.io';
-import { createClient } from 'redis';
+import { config } from '@root/config';
+import applicationRoutes from '@root/routes';
 import { createAdapter } from '@socket.io/redis-adapter';
 import compression from 'compression';
-import 'express-async-errors';
-import { config } from './config';
-import applicationRoutes from './routes';
+import cookieSession from 'cookie-session';
+import cors from 'cors';
 import {
-  CustomError,
-  IErrorResposne,
-} from './shared/globals/helpers/error-handler';
+  Application,
+  NextFunction,
+  Request,
+  Response,
+  json,
+  urlencoded,
+} from 'express';
+import 'express-async-errors';
+import helmet from 'helmet';
+import hpp from 'hpp';
+import HTTP_STATUS from 'http-status-codes';
+import { createClient } from 'redis';
+import { Server } from 'socket.io';
 
 const SERVER_PORT = 5000;
 const log = config.createLogger('server');
 
+import { CustomError, IErrorResposne } from '@global/helpers/error-handler';
 import http from 'http';
-import { createLogger } from 'bunyan';
 
 export class ChattyServer {
   private app: Application;
@@ -131,5 +127,7 @@ export class ChattyServer {
     });
   }
 
-  private socketIoConnection(io: Server): void {}
+  private socketIoConnection(io: Server): void {
+    log.info('socketIoConnection');
+  }
 }
