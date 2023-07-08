@@ -24,6 +24,7 @@ const log = config.createLogger('server');
 
 import { CustomError, IErrorResposne } from '@global/helpers/error-handler';
 import http from 'http';
+import { SocketIOPostHandler } from '@socket/post';
 
 export class ChattyServer {
   private app: Application;
@@ -128,6 +129,8 @@ export class ChattyServer {
   }
 
   private socketIoConnection(io: Server): void {
-    log.info('socketIoConnection');
+    const postSocketHandler: SocketIOPostHandler = new SocketIOPostHandler(io);
+
+    postSocketHandler.listen();
   }
 }
